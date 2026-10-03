@@ -1,1 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GridSnag (巡檢軸網) - 100% 離線機密工程巡檢與法規數位小黑板</title>
+    <meta name="description" content="GridSnag 是專為高科技廠房與機密工程打造的原生施工巡檢系統。100% 離線零外聯架構、CAD 向量圖紙千倍縮放、軸線柱位自動吸附、端側 AI 語音填單、法規小黑板浮水印相片及一鍵官方驗收 PDF 報告。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f15;
+            --surface-color: #121822;
+            --surface-card: #18202d;
+            --primary-cyan: #00e5ff;
+            --primary-accent: #00bcd4;
+            --text-main: #f0f4f8;
+            --text-sub: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --badge-bg: rgba(0, 229, 255, 0.12);
+            --shield-green: #10b981;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 導航列 */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: rgba(11, 15, 21, 0.85);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #00e5ff, #0077b6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #0b0f15;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-cyan);
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, #00e5ff, #00a8cc);
+            color: #0b0f15;
+            padding: 0.6rem 1.3rem;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 229, 255, 0.35);
+        }
+
+        /* Hero 區域 */
+        .hero {
+            padding: 6rem 1.5rem 4rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 229, 255, 0.15) 0%, rgba(11, 15, 21, 0) 70%);
+            filter: blur(60px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--badge-bg);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            color: var(--primary-cyan);
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #00e5ff, #80f2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: clamp(1.05rem, 2vw, 1.25rem);
+            color: var(--text-sub);
+            max-width: 760px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+            margin-bottom: 3.5rem;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            color: #ffffff;
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1.6rem;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* 系統特點矩陣 */
+        .features-section {
+            padding: 4rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-header p {
+            color: var(--text-sub);
+            font-size: 1.05rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0, 229, 255, 0.35);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(0, 229, 255, 0.12);
+            color: var(--primary-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #ffffff;
+        }
+
+        .feature-card p {
+            color: var(--text-sub);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* 離線安全認證條 */
+        .security-banner {
+            max-width: 1100px;
+            margin: 2rem auto 5rem;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(0, 229, 255, 0.05));
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .security-badge-icon {
+            font-size: 3rem;
+            color: var(--shield-green);
+        }
+
+        .security-content {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .security-content h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .security-content p {
+            color: var(--text-sub);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* 跨平台支援 */
+        .platforms-list {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .platform-pill {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: #ffffff;
+        }
+
+        /* 頁尾 */
+        footer {
+            border-top: 1px solid var(--border-color);
+            background: #090c10;
+            padding: 4rem 1.5rem 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-col a {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--primary-cyan);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero {
+                padding-top: 4rem;
+            }
+            .security-banner {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 頂部導航 -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="brand-logo">
+                <div class="logo-icon">G</div>
+                GridSnag 巡檢軸網
+            </a>
+            <nav class="nav-links">
+                <a href="#features">功能特色</a>
+                <a href="#security">機密零外洩</a>
+                <a href="#workflow">五步驟操作</a>
+                <a href="privacy.html">隱私權政策</a>
+            </nav>
+            <a href="#download" class="btn-download">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.74 1.03-1.77.92-2.8-.89.04-1.99.6-2.63 1.34-.56.64-.99 1.68-.86 2.7.99.08 2.02-.53 2.57-1.24z"/>
+                </svg>
+                App Store 下載
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero 區域 -->
+    <main>
+        <section class="hero">
+            <div class="hero-badge">
+                🛡️ 零外聯保證 · 符合高科技晶圓廠與機密工程資安規範
+            </div>
+            <h1>現場巡檢零雲端外聯<br><span>CAD 軸線自動捕捉 · 數位電子黑板</span></h1>
+            <p class="hero-desc">
+                專為無塵室、半導體機電與重大工程巡檢工程師量身打造。千倍向量藍圖縮放、軸網自動計算、端側 AI 語音自動填單，相片一鍵燒錄法規電子小黑板並匯出正式驗收報告。
+            </p>
+            <div class="cta-group">
+                <a href="#download" class="btn-download" style="padding: 0.85rem 2rem; font-size: 1.05rem;">
+                    下載 GridSnag (Universal)
+                </a>
+                <a href="#features" class="btn-secondary">
+                    探索核心技術架構
+                </a>
+            </div>
+
+            <div class="platforms-list">
+                <div class="platform-pill">📱 iPhone 現場拍照錄音</div>
+                <div class="platform-pill">📋 iPad 巨幅圖紙釘選</div>
+                <div class="platform-pill">💻 Mac 工務所報表彙整</div>
+            </div>
+        </section>
+
+        <!-- 資安承諾 Banner -->
+        <section id="security" class="security-banner">
+            <div class="security-badge-icon">🔒</div>
+            <div class="security-content">
+                <h3>100% 離線本地運算 · 零雲端資料外洩 (Zero Cloud Egress)</h3>
+                <p>
+                    GridSnag 內部未設置任何後端 API、追蹤器或分析日誌。圖紙、查驗相片、語音轉錄及驗收清單均採用 Apple 原生 Core Data / SwiftData 儲存於裝置本機加密沙盒，免連網即可完整運作，完全杜絕機敏廠區藍圖外流風險。
+                </p>
+            </div>
+        </section>
+
+        <!-- 核心功能矩陣 -->
+        <section id="features" class="features-section">
+            <div class="section-header">
+                <h2>現代化工務巡檢 五大工程支柱</h2>
+                <p>結合 CAD 幾何算法與 Apple Neural Engine，重新定義現場查驗流程</p>
+            </div>
+
+            <div class="feature-grid">
+                <!-- 特色 1 -->
+                <div class="feature-card">
+                    <div class="card-icon">📐</div>
+                    <h3>CAD 向量圖紙千倍縮放</h3>
+                    <p>原生 PDFKit 向量圖形渲染引擎，支援高達 1000% 深度無損縮放。微小設備管線、閥門標記分毫畢現，告別模糊點陣圖。</p>
+                </div>
+
+                <!-- 特色 2 -->
+                <div class="feature-card">
+                    <div class="card-icon">🎯</div>
+                    <h3>結構軸線柱位自動捕捉</h3>
+                    <p>點擊圖紙任意位置，幾何演算法自動計算並綁定最近之結構柱網座標（如 Grid P22-P23 / RB-RC），免手動查找定位。</p>
+                </div>
+
+                <!-- 特色 3 -->
+                <div class="feature-card">
+                    <div class="card-icon">🎙️</div>
+                    <h3>免手寫語音 AI 自動填單</h3>
+                    <p>搭載 WhisperKit 與端側 Core ML 智慧抽取技術。邊走邊說即時轉錄，零耗時自動識別工種分類、缺失標題、責任分包商與限改期。</p>
+                </div>
+
+                <!-- 特色 4 -->
+                <div class="feature-card">
+                    <div class="card-icon">📷</div>
+                    <h3>法規電子小黑板浮水印</h3>
+                    <p>拍照後自動將專案案名、柱位座標、缺失說明與查驗合格章永久燒錄於相片右下角，完全符合公共工程與國際施工規範。</p>
+                </div>
+
+                <!-- 特色 5 -->
+                <div class="feature-card">
+                    <div class="card-icon">📑</div>
+                    <h3>一鍵原生驗收 PDF 報告</h3>
+                    <p>本機向量渲染符合公共工程稽核規格之正式驗收紀錄表。可直接透過 AirDrop、隨身碟交付業主或監造單位，效率提升 80%。</p>
+                </div>
+
+                <!-- 特色 6 -->
+                <div class="feature-card">
+                    <div class="card-icon">🌍</div>
+                    <h3>跨國法規智慧切換</h3>
+                    <p>內建台灣公共工程、美國 OSHA 1926/IBC、日本國交省施工標準、德國 DIN 4102 及韓國重大災害處罰法等五國規範與電子黑板樣式。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5 步驟教學導覽 -->
+        <section id="workflow" class="features-section" style="background: rgba(255, 255, 255, 0.02); border-radius: 24px; padding: 4rem 2rem;">
+            <div class="section-header">
+                <h2>極簡工作流：從匯入到驗收只需 5 步</h2>
+                <p>擺脫繁重的紙本藍圖與雜亂照片整理</p>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 800px; margin: 0 auto;">
+                <div style="display: flex; gap: 1.25rem; align-items: flex-start;">
+                    <div style="background: var(--primary-cyan); color: #000; font-weight: 800; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</div>
+                    <div>
+                        <h4 style="font-size: 1.15rem; margin-bottom: 0.25rem;">自訂案名與工地現場，匯入 CAD 圖紙</h4>
+                        <p style="color: var(--text-sub); font-size: 0.95rem;">設定您的專案案名與工地（無殘留示範資料），支援單張或多張向量 PDF 藍圖，或直接使用結構網格模式。</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1.25rem; align-items: flex-start;">
+                    <div style="background: var(--primary-cyan); color: #000; font-weight: 800; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</div>
+                    <div>
+                        <h4 style="font-size: 1.15rem; margin-bottom: 0.25rem;">輕觸藍圖落點，系統自動識別柱位</h4>
+                        <p style="color: var(--text-sub); font-size: 0.95rem;">於缺失發生位置輕點一下，釘選即刻生成，並自動推算鄰近柱位與軸線編號。</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1.25rem; align-items: flex-start;">
+                    <div style="background: var(--primary-cyan); color: #000; font-weight: 800; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">3</div>
+                    <div>
+                        <h4 style="font-size: 1.15rem; margin-bottom: 0.25rem;">現場免手寫口述，端側 AI 自動填單</h4>
+                        <p style="color: var(--text-sub); font-size: 0.95rem;">邊走邊講：「柱位 P24 風管未拉安全母索，請東元機電今日改善。」端側 AI 即刻抽取出工單細節。</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1.25rem; align-items: flex-start;">
+                    <div style="background: var(--primary-cyan); color: #000; font-weight: 800; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">4</div>
+                    <div>
+                        <h4 style="font-size: 1.15rem; margin-bottom: 0.25rem;">拍攝查驗照片，自動燒錄工程小黑板</h4>
+                        <p style="color: var(--text-sub); font-size: 0.95rem;">調用相機拍照，相片右下角自動嵌入符合法規之數位小黑板與合格印戳，免去後製修圖時間。</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1.25rem; align-items: flex-start;">
+                    <div style="background: var(--primary-cyan); color: #000; font-weight: 800; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">5</div>
+                    <div>
+                        <h4 style="font-size: 1.15rem; margin-bottom: 0.25rem;">一鍵匯出驗收 PDF 報告，直接交付業主</h4>
+                        <p style="color: var(--text-sub); font-size: 0.95rem;">點擊「產出報表」，即時渲染出附帶圖紙定位縮圖與黑板相片之正式驗收總表，支援 AirDrop 現場交付。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 頁尾 -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col" style="grid-column: span 2;">
+                <div class="brand-logo" style="margin-bottom: 1rem;">
+                    <div class="logo-icon">G</div>
+                    GridSnag 巡檢軸網
+                </div>
+                <p style="color: var(--text-sub); font-size: 0.9rem; max-width: 400px; line-height: 1.7;">
+                    專為高機密施工場所設計的下一代 CAD 巡檢與數位黑板工具。原生支援 iOS、iPadOS 與 macOS。
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <h4>法規與條款</h4>
+                <ul>
+                    <li><a href="privacy.html">隱私權政策 (Privacy Policy)</a></li>
+                    <li><a href="#security">機密零外洩認證</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>支援與聯繫</h4>
+                <ul>
+                    <li><a href="mailto:support@vajrahowly.com">技術支援：support@vajrahowly.com</a></li>
+                    <li><a href="https://github.com/vajrahowly/gridsnag" target="_blank">GitHub 官方專案</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>&copy; 2026 Vajrahowly. All rights reserved. Bundle ID: com.vajrahowly.gridsnag</div>
+            <div>Designed for iPhone, iPad & Mac (Universal Purchase)</div>
+        </div>
+    </footer>
+
+</body>
+</html>
