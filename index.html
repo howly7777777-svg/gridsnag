@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GridSnag (巡檢軸網) - 100% 離線機密工程巡檢與法規數位小黑板</title>
-    <meta name="description" content="GridSnag 是專為高科技廠房與機密工程打造的原生施工巡檢系統。100% 離線零外聯架構、CAD 向量圖紙千倍縮放、軸線柱位自動吸附、端側 AI 語音填單、法規小黑板浮水印相片及一鍵官方驗收 PDF 報告。">
+    <title id="page-title">GridSnag - 100% Offline Structural Snagging & Regulatory Digital Blackboard</title>
+    <meta name="description" id="meta-description" content="GridSnag is the next-generation 100% offline field inspection and punch list system built natively for semiconductor fabs, cleanroom facilities, MEP contractors, and critical infrastructure. Zero Cloud Egress, 1000% vector CAD zoom, column grid auto-snap, on-device voice AI, and regulatory digital blackboard photos.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #0b0f15;
@@ -29,31 +29,32 @@
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 'Noto Sans TC', 'Noto Sans JP', 'Noto Sans KR', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* 導航列 */
+        /* Header & Navigation */
         header {
             position: sticky;
             top: 0;
             z-index: 100;
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            background: rgba(11, 15, 21, 0.85);
+            background: rgba(11, 15, 21, 0.90);
             border-bottom: 1px solid var(--border-color);
         }
 
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 1.5rem;
+            padding: 0.9rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
         }
 
         .brand-logo {
@@ -65,6 +66,7 @@
             letter-spacing: -0.5px;
             color: #ffffff;
             text-decoration: none;
+            flex-shrink: 0;
         }
 
         .logo-icon {
@@ -81,36 +83,81 @@
             box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
         }
 
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .nav-links a {
             color: var(--text-sub);
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             font-weight: 500;
             transition: color 0.2s ease;
+            white-space: nowrap;
         }
 
         .nav-links a:hover {
             color: var(--primary-cyan);
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Language Switcher */
+        .lang-switcher {
+            display: flex;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 3px;
+            border-radius: 999px;
+            border: 1px solid var(--border-color);
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-sub);
+            padding: 4px 10px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn:hover {
+            color: #fff;
+        }
+
+        .lang-btn.active {
+            background: var(--primary-cyan);
+            color: #0b0f15;
+            box-shadow: 0 2px 8px rgba(0, 229, 255, 0.35);
+        }
+
         .btn-download {
             background: linear-gradient(135deg, #00e5ff, #00a8cc);
             color: #0b0f15;
-            padding: 0.6rem 1.3rem;
+            padding: 0.55rem 1.25rem;
             border-radius: 999px;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             text-decoration: none;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            white-space: nowrap;
         }
 
         .btn-download:hover {
@@ -118,9 +165,9 @@
             box-shadow: 0 6px 20px rgba(0, 229, 255, 0.35);
         }
 
-        /* Hero 區域 */
+        /* Hero Section */
         .hero {
-            padding: 6rem 1.5rem 4rem;
+            padding: 5.5rem 1.5rem 4rem;
             max-width: 1100px;
             margin: 0 auto;
             text-align: center;
@@ -133,9 +180,9 @@
             top: 20%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 500px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(0, 229, 255, 0.15) 0%, rgba(11, 15, 21, 0) 70%);
+            width: 550px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(0, 229, 255, 0.16) 0%, rgba(11, 15, 21, 0) 70%);
             filter: blur(60px);
             z-index: -1;
             pointer-events: none;
@@ -146,19 +193,28 @@
             align-items: center;
             gap: 0.5rem;
             background: var(--badge-bg);
-            border: 1px solid rgba(0, 229, 255, 0.3);
+            border: 1px solid rgba(0, 229, 255, 0.35);
             color: var(--primary-cyan);
-            padding: 0.4rem 1rem;
+            padding: 0.4rem 1.1rem;
             border-radius: 999px;
             font-size: 0.85rem;
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: 0.5px;
             margin-bottom: 1.5rem;
         }
 
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary-cyan);
+            box-shadow: 0 0 8px var(--primary-cyan);
+        }
+
         .hero h1 {
-            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-size: clamp(2.3rem, 5vw, 3.6rem);
             font-weight: 800;
-            line-height: 1.15;
+            line-height: 1.2;
             letter-spacing: -1px;
             margin-bottom: 1.5rem;
             color: #ffffff;
@@ -173,7 +229,7 @@
         .hero-desc {
             font-size: clamp(1.05rem, 2vw, 1.25rem);
             color: var(--text-sub);
-            max-width: 760px;
+            max-width: 840px;
             margin: 0 auto 2.5rem;
             line-height: 1.7;
         }
@@ -203,7 +259,49 @@
             border-color: rgba(255, 255, 255, 0.2);
         }
 
-        /* 系統特點矩陣 */
+        /* Security Guarantee Banner */
+        .security-banner {
+            max-width: 1100px;
+            margin: 1rem auto 4.5rem;
+            padding: 2.2rem 2.5rem;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.09), rgba(0, 229, 255, 0.06));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .security-badge-icon {
+            font-size: 3rem;
+            color: var(--shield-green);
+            flex-shrink: 0;
+        }
+
+        .security-content {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .security-content h3 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .security-content p {
+            color: var(--text-sub);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Features Section */
         .features-section {
             padding: 4rem 1.5rem;
             max-width: 1200px;
@@ -225,6 +323,8 @@
         .section-header p {
             color: var(--text-sub);
             font-size: 1.05rem;
+            max-width: 680px;
+            margin: 0 auto;
         }
 
         .feature-grid {
@@ -262,64 +362,128 @@
         }
 
         .feature-card h3 {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.65rem;
             color: #ffffff;
         }
 
         .feature-card p {
             color: var(--text-sub);
-            font-size: 0.95rem;
+            font-size: 0.94rem;
             line-height: 1.6;
         }
 
-        /* 離線安全認證條 */
-        .security-banner {
-            max-width: 1100px;
-            margin: 2rem auto 5rem;
-            padding: 2.5rem;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(0, 229, 255, 0.05));
-            border: 1px solid rgba(16, 185, 129, 0.25);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            flex-wrap: wrap;
+        /* Regulatory Matrix */
+        .reg-matrix {
+            margin-top: 3rem;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
         }
 
-        .security-badge-icon {
-            font-size: 3rem;
-            color: var(--shield-green);
-        }
-
-        .security-content {
-            flex: 1;
-            min-width: 280px;
-        }
-
-        .security-content h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
+        .reg-matrix h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 1.25rem;
             color: #ffffff;
-            margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
         }
 
-        .security-content p {
+        .reg-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .reg-pill {
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        .reg-pill .country {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.25rem;
+        }
+
+        .reg-pill .code {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary-cyan);
+            margin-bottom: 0.4rem;
+        }
+
+        .reg-pill .desc {
+            font-size: 0.82rem;
+            color: var(--text-sub);
+            line-height: 1.4;
+        }
+
+        /* Workflow Steps */
+        .workflow-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 4rem 2rem;
+            margin: 4rem auto;
+            max-width: 1100px;
+        }
+
+        .step-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 1.25rem;
+            align-items: flex-start;
+        }
+
+        .step-num {
+            background: var(--primary-cyan);
+            color: #000;
+            font-weight: 800;
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.95rem;
+            box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+        }
+
+        .step-content h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            color: #ffffff;
+        }
+
+        .step-content p {
             color: var(--text-sub);
             font-size: 0.95rem;
             line-height: 1.6;
         }
 
-        /* 跨平台支援 */
+        /* Platforms Pill List */
         .platforms-list {
             display: flex;
-            gap: 1.5rem;
+            gap: 1.25rem;
             justify-content: center;
-            margin-top: 2rem;
+            margin: 2.5rem 0;
             flex-wrap: wrap;
         }
 
@@ -336,7 +500,35 @@
             color: #ffffff;
         }
 
-        /* 頁尾 */
+        /* FAQ / Support Section */
+        .faq-section {
+            padding: 4rem 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .faq-item h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary-cyan);
+        }
+
+        .faq-item p {
+            color: var(--text-sub);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
         footer {
             border-top: 1px solid var(--border-color);
             background: #090c10;
@@ -349,33 +541,33 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 3rem;
+            gap: 2.5rem;
             margin-bottom: 3rem;
         }
 
         .footer-col h4 {
             font-size: 1rem;
             font-weight: 700;
-            color: #ffffff;
             margin-bottom: 1.25rem;
+            color: #ffffff;
         }
 
         .footer-col ul {
             list-style: none;
         }
 
-        .footer-col li {
+        .footer-col ul li {
             margin-bottom: 0.75rem;
         }
 
-        .footer-col a {
+        .footer-col ul li a {
             color: var(--text-sub);
             text-decoration: none;
             font-size: 0.9rem;
             transition: color 0.2s ease;
         }
 
-        .footer-col a:hover {
+        .footer-col ul li a:hover {
             color: var(--primary-cyan);
         }
 
@@ -390,7 +582,7 @@
             flex-wrap: wrap;
             gap: 1rem;
             font-size: 0.85rem;
-            color: #64748b;
+            color: var(--text-sub);
         }
 
         @media (max-width: 768px) {
@@ -398,7 +590,7 @@
                 display: none;
             }
             .hero {
-                padding-top: 4rem;
+                padding-top: 3.5rem;
             }
             .security-banner {
                 padding: 1.5rem;
@@ -408,203 +600,710 @@
 </head>
 <body>
 
-    <!-- 頂部導航 -->
+    <!-- Header Navigation -->
     <header>
         <div class="nav-container">
-            <a href="#" class="brand-logo">
+            <a href="index.html" class="brand-logo">
                 <div class="logo-icon">G</div>
-                GridSnag 巡檢軸網
+                GridSnag
             </a>
-            <nav class="nav-links">
-                <a href="#features">功能特色</a>
-                <a href="#security">機密零外洩</a>
-                <a href="#workflow">五步驟操作</a>
-                <a href="privacy.html">隱私權政策</a>
-            </nav>
-            <a href="#download" class="btn-download">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.74 1.03-1.77.92-2.8-.89.04-1.99.6-2.63 1.34-.56.64-.99 1.68-.86 2.7.99.08 2.02-.53 2.57-1.24z"/>
-                </svg>
-                App Store 下載
-            </a>
+
+            <div class="nav-center">
+                <nav class="nav-links">
+                    <a href="#features" id="nav-features">Features</a>
+                    <a href="#security" id="nav-security">Zero Cloud Egress</a>
+                    <a href="#workflow" id="nav-workflow">Workflow</a>
+                    <a href="#faq" id="nav-faq">FAQ & Support</a>
+                    <a href="privacy.html" id="nav-privacy">Privacy</a>
+                </nav>
+            </div>
+
+            <div class="nav-right">
+                <!-- Language Switcher -->
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="zh">繁中</button>
+                    <button class="lang-btn" data-lang="ja">日本語</button>
+                    <button class="lang-btn" data-lang="ko">한국어</button>
+                    <button class="lang-btn" data-lang="de">DE</button>
+                </div>
+
+                <a href="#download" class="btn-download" id="nav-btn-download">
+                    <span></span> App Store
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Hero 區域 -->
     <main>
+        <!-- Hero Section -->
         <section class="hero">
             <div class="hero-badge">
-                🛡️ 零外聯保證 · 符合高科技晶圓廠與機密工程資安規範
+                <div class="hero-badge-dot"></div>
+                <span id="hero-badge-text">100% OFFLINE & ZERO CLOUD EGRESS CERTIFIED</span>
             </div>
-            <h1>現場巡檢零雲端外聯<br><span>CAD 軸線自動捕捉 · 數位電子黑板</span></h1>
-            <p class="hero-desc">
-                專為無塵室、半導體機電與重大工程巡檢工程師量身打造。千倍向量藍圖縮放、軸網自動計算、端側 AI 語音自動填單，相片一鍵燒錄法規電子小黑板並匯出正式驗收報告。
+
+            <h1 id="hero-title">
+                The Mission-Critical Construction Snagging & <span>Digital Blackboard</span> System
+            </h1>
+
+            <p class="hero-desc" id="hero-desc">
+                Engineered specifically for semiconductor fabs, cleanrooms, and mission-critical jobsites. 100% offline on-device architecture, 1000% vector CAD zoom, column grid auto-snapping, local speech AI, and regulatory digital blackboard photos.
             </p>
+
             <div class="cta-group">
-                <a href="#download" class="btn-download" style="padding: 0.85rem 2rem; font-size: 1.05rem;">
-                    下載 GridSnag (Universal)
+                <a href="#download" class="btn-download" style="padding: 0.85rem 2rem; font-size: 1rem;" id="hero-cta-appstore">
+                    <span></span> Download on App Store
                 </a>
-                <a href="#features" class="btn-secondary">
-                    探索核心技術架構
+                <a href="privacy.html" class="btn-secondary" id="hero-cta-privacy">
+                    🛡️ Zero Cloud Egress Guarantee
                 </a>
             </div>
 
+            <!-- Platforms List -->
             <div class="platforms-list">
-                <div class="platform-pill">📱 iPhone 現場拍照錄音</div>
-                <div class="platform-pill">📋 iPad 巨幅圖紙釘選</div>
-                <div class="platform-pill">💻 Mac 工務所報表彙整</div>
+                <div class="platform-pill">📱 iPhone (iOS 17+)</div>
+                <div class="platform-pill">📲 iPad (iPadOS 17+)</div>
+                <div class="platform-pill">💻 Mac (macOS 14+)</div>
+                <div class="platform-pill">🔒 Universal Purchase</div>
             </div>
         </section>
 
-        <!-- 資安承諾 Banner -->
+        <!-- Security Guarantee Banner -->
         <section id="security" class="security-banner">
-            <div class="security-badge-icon">🔒</div>
+            <div class="security-badge-icon">🛡️</div>
             <div class="security-content">
-                <h3>100% 離線本地運算 · 零雲端資料外洩 (Zero Cloud Egress)</h3>
-                <p>
-                    GridSnag 內部未設置任何後端 API、追蹤器或分析日誌。圖紙、查驗相片、語音轉錄及驗收清單均採用 Apple 原生 Core Data / SwiftData 儲存於裝置本機加密沙盒，免連網即可完整運作，完全杜絕機敏廠區藍圖外流風險。
+                <h3 id="sec-title">100% Offline Air-Gapped Architecture · Zero Cloud Egress</h3>
+                <p id="sec-desc">
+                    Zero cloud API calls, zero analytics trackers, zero external servers. All drawings, photos, voice transcripts, and punch records remain encrypted inside Apple's local sandbox on your device. Verified for TSMC fabs, semiconductor cleanrooms, defense, and high-security industrial facilities.
                 </p>
             </div>
         </section>
 
-        <!-- 核心功能矩陣 -->
+        <!-- Core Features Grid -->
         <section id="features" class="features-section">
             <div class="section-header">
-                <h2>現代化工務巡檢 五大工程支柱</h2>
-                <p>結合 CAD 幾何算法與 Apple Neural Engine，重新定義現場查驗流程</p>
+                <h2 id="features-title">Engineered for High-Tech & Mission-Critical Jobsites</h2>
+                <p id="features-subtitle">Revolutionizing field audit efficiency through five core technological pillars</p>
             </div>
 
             <div class="feature-grid">
-                <!-- 特色 1 -->
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="card-icon">🔒</div>
+                    <h3 id="feat1-title">Zero Cloud Egress Guarantee</h3>
+                    <p id="feat1-desc">Complete air-gapped security. No remote servers, no cloud telemetry, no account login. Blueprints and photos never leave your device.</p>
+                </div>
+
+                <!-- Feature 2 -->
                 <div class="feature-card">
                     <div class="card-icon">📐</div>
-                    <h3>CAD 向量圖紙千倍縮放</h3>
-                    <p>原生 PDFKit 向量圖形渲染引擎，支援高達 1000% 深度無損縮放。微小設備管線、閥門標記分毫畢現，告別模糊點陣圖。</p>
+                    <h3 id="feat2-title">1000% Vector CAD Lossless Zoom</h3>
+                    <p id="feat2-desc">Powered by native PDFKit vector rendering. Zoom in up to 1000% to inspect micro-valves, ductwork, and conduit line numbers with sub-millimeter clarity.</p>
                 </div>
 
-                <!-- 特色 2 -->
+                <!-- Feature 3 -->
                 <div class="feature-card">
                     <div class="card-icon">🎯</div>
-                    <h3>結構軸線柱位自動捕捉</h3>
-                    <p>點擊圖紙任意位置，幾何演算法自動計算並綁定最近之結構柱網座標（如 Grid P22-P23 / RB-RC），免手動查找定位。</p>
+                    <h3 id="feat3-title">Column Grid Auto-Snap Algorithm</h3>
+                    <p id="feat3-desc">Tap anywhere on the drawing. The geometric engine instantly snaps to the nearest column gridlines (e.g., Grid P22-P23 / RB-RC) automatically.</p>
                 </div>
 
-                <!-- 特色 3 -->
+                <!-- Feature 4 -->
                 <div class="feature-card">
                     <div class="card-icon">🎙️</div>
-                    <h3>免手寫語音 AI 自動填單</h3>
-                    <p>搭載 WhisperKit 與端側 Core ML 智慧抽取技術。邊走邊說即時轉錄，零耗時自動識別工種分類、缺失標題、責任分包商與限改期。</p>
+                    <h3 id="feat4-title">On-Device Speech AI Structuring</h3>
+                    <p id="feat4-desc">Dictate hands-free while walking the jobsite. WhisperKit & Core ML transcribe and extract defect discipline, subcontractor, and due date locally in real time.</p>
                 </div>
 
-                <!-- 特色 4 -->
+                <!-- Feature 5 -->
                 <div class="feature-card">
                     <div class="card-icon">📷</div>
-                    <h3>法規電子小黑板浮水印</h3>
-                    <p>拍照後自動將專案案名、柱位座標、缺失說明與查驗合格章永久燒錄於相片右下角，完全符合公共工程與國際施工規範。</p>
+                    <h3 id="feat5-title">Regulatory Digital Blackboard</h3>
+                    <p id="feat5-desc">Site photos automatically burn a permanent regulatory blackboard with project name, column coordinates, inspection items, and tamper-proof SHA-256 stamp.</p>
                 </div>
 
-                <!-- 特色 5 -->
+                <!-- Feature 6 -->
                 <div class="feature-card">
                     <div class="card-icon">📑</div>
-                    <h3>一鍵原生驗收 PDF 報告</h3>
-                    <p>本機向量渲染符合公共工程稽核規格之正式驗收紀錄表。可直接透過 AirDrop、隨身碟交付業主或監造單位，效率提升 80%。</p>
+                    <h3 id="feat6-title">One-Tap Official Audit PDF</h3>
+                    <p id="feat6-desc">Export official audit reports locally with blueprint thumbnail indexes and watermarked photos. Share immediately via AirDrop or local export.</p>
                 </div>
+            </div>
 
-                <!-- 特色 6 -->
-                <div class="feature-card">
-                    <div class="card-icon">🌍</div>
-                    <h3>跨國法規智慧切換</h3>
-                    <p>內建台灣公共工程、美國 OSHA 1926/IBC、日本國交省施工標準、德國 DIN 4102 及韓國重大災害處罰法等五國規範與電子黑板樣式。</p>
+            <!-- Global Regulatory Matrix -->
+            <div class="reg-matrix">
+                <h3 id="reg-matrix-title">🌍 Multi-Jurisdiction Regulatory Presets & Blackboard Standards</h3>
+                <div class="reg-grid">
+                    <div class="reg-pill">
+                        <div class="country">🇺🇸 United States</div>
+                        <div class="code">OSHA 1926 & IBC 2026</div>
+                        <div class="desc" id="reg-desc-us">Fall protection, UL firestopping penetration, Class 1 Div 2 electrical specs.</div>
+                    </div>
+                    <div class="reg-pill">
+                        <div class="country">🇩🇪 Germany / EU</div>
+                        <div class="code">DIN 4102 & MLAR</div>
+                        <div class="desc" id="reg-desc-de">Fire compartment seals, DGUV safety guidelines, European CE standards.</div>
+                    </div>
+                    <div class="reg-pill">
+                        <div class="country">🇯🇵 Japan</div>
+                        <div class="code">国土交通省 & 建築基準法</div>
+                        <div class="desc" id="reg-desc-jp">公共建築工事標準仕様書、工事写真管理基準、配管貫通部耐火措置。</div>
+                    </div>
+                    <div class="reg-pill">
+                        <div class="country">🇹🇼 Taiwan</div>
+                        <div class="code">公共工程委員會 & 職安法</div>
+                        <div class="desc" id="reg-desc-tw">施工品質管理作業要點、高科技無塵室消防貫穿部、動火作業檢驗。</div>
+                    </div>
+                    <div class="reg-pill">
+                        <div class="country">🇰🇷 South Korea</div>
+                        <div class="code">산업안전보건법 & SAPA</div>
+                        <div class="desc" id="reg-desc-kr">중대재해처벌법 대비 공사현장 안전점검, 방화구획 관통부 밀폐 확인.</div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5 步驟教學導覽 -->
-        <section id="workflow" class="features-section" style="background: rgba(255, 255, 255, 0.02); border-radius: 24px; padding: 4rem 2rem;">
+        <!-- 5-Step Workflow Section -->
+        <section id="workflow" class="workflow-box">
             <div class="section-header">
-                <h2>極簡工作流：從匯入到驗收只需 5 步</h2>
-                <p>擺脫繁重的紙本藍圖與雜亂照片整理</p>
+                <h2 id="wf-title">Minimalist Field Workflow: From Blueprint to Sign-off in 5 Steps</h2>
+                <p id="wf-subtitle">Eliminate cumbersome paperwork and disorganized photo sorting forever</p>
             </div>
 
-            <div style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 800px; margin: 0 auto;">
-                <div style="display: flex; gap: 1.25rem; align-items: flex-start;">
-                    <div style="background: var(--primary-cyan); color: #000; font-weight: 800; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</div>
-                    <div>
-                        <h4 style="font-size: 1.15rem; margin-bottom: 0.25rem;">自訂案名與工地現場，匯入 CAD 圖紙</h4>
-                        <p style="color: var(--text-sub); font-size: 0.95rem;">設定您的專案案名與工地（無殘留示範資料），支援單張或多張向量 PDF 藍圖，或直接使用結構網格模式。</p>
+            <div class="step-list">
+                <div class="step-item">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <h4 id="step1-title">Create Custom Project & Import Vector Blueprints</h4>
+                        <p id="step1-desc">Set up your specific project and jobsite with a clean workspace (zero leftover sample data). Supports single or multi-sheet CAD vector PDFs, or blueprint-free coordinate grid mode.</p>
                     </div>
                 </div>
 
-                <div style="display: flex; gap: 1.25rem; align-items: flex-start;">
-                    <div style="background: var(--primary-cyan); color: #000; font-weight: 800; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</div>
-                    <div>
-                        <h4 style="font-size: 1.15rem; margin-bottom: 0.25rem;">輕觸藍圖落點，系統自動識別柱位</h4>
-                        <p style="color: var(--text-sub); font-size: 0.95rem;">於缺失發生位置輕點一下，釘選即刻生成，並自動推算鄰近柱位與軸線編號。</p>
+                <div class="step-item">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <h4 id="step2-title">Tap to Pin · Automatic Column Grid Snapping</h4>
+                        <p id="step2-desc">Tap directly on the defect location. A snag pin is created instantly, with the geometric algorithm calculating nearest column axis coordinates (e.g. Grid P22-P23 / RB-RC).</p>
                     </div>
                 </div>
 
-                <div style="display: flex; gap: 1.25rem; align-items: flex-start;">
-                    <div style="background: var(--primary-cyan); color: #000; font-weight: 800; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">3</div>
-                    <div>
-                        <h4 style="font-size: 1.15rem; margin-bottom: 0.25rem;">現場免手寫口述，端側 AI 自動填單</h4>
-                        <p style="color: var(--text-sub); font-size: 0.95rem;">邊走邊講：「柱位 P24 風管未拉安全母索，請東元機電今日改善。」端側 AI 即刻抽取出工單細節。</p>
+                <div class="step-item">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <h4 id="step3-title">Hands-Free Voice Dictation · On-Device AI Structuring</h4>
+                        <p id="step3-desc">Speak naturally on site: "Firestopping sealant thickness between columns P22-P23 is inadequate. Critical defect, notify Tatung Fire Engineering to rectify by Friday." Core ML structures it instantly.</p>
                     </div>
                 </div>
 
-                <div style="display: flex; gap: 1.25rem; align-items: flex-start;">
-                    <div style="background: var(--primary-cyan); color: #000; font-weight: 800; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">4</div>
-                    <div>
-                        <h4 style="font-size: 1.15rem; margin-bottom: 0.25rem;">拍攝查驗照片，自動燒錄工程小黑板</h4>
-                        <p style="color: var(--text-sub); font-size: 0.95rem;">調用相機拍照，相片右下角自動嵌入符合法規之數位小黑板與合格印戳，免去後製修圖時間。</p>
+                <div class="step-item">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <h4 id="step4-title">Snap Inspection Photo · Auto-Burn Digital Blackboard</h4>
+                        <p id="step4-desc">Capture the photo directly in the app. A permanent, regulatory-compliant digital blackboard with project metadata, coordinates, and timestamp is permanently burnt into the pixels.</p>
                     </div>
                 </div>
 
-                <div style="display: flex; gap: 1.25rem; align-items: flex-start;">
-                    <div style="background: var(--primary-cyan); color: #000; font-weight: 800; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">5</div>
-                    <div>
-                        <h4 style="font-size: 1.15rem; margin-bottom: 0.25rem;">一鍵匯出驗收 PDF 報告，直接交付業主</h4>
-                        <p style="color: var(--text-sub); font-size: 0.95rem;">點擊「產出報表」，即時渲染出附帶圖紙定位縮圖與黑板相片之正式驗收總表，支援 AirDrop 現場交付。</p>
+                <div class="step-item">
+                    <div class="step-num">5</div>
+                    <div class="step-content">
+                        <h4 id="step5-title">One-Tap Audit PDF Report · Instant Local Delivery</h4>
+                        <p id="step5-desc">Tap "Export Official PDF" to generate a professional audit report with blueprint locator thumbnails, photos, and sign-off lines. Transfer instantly via AirDrop.</p>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- FAQ & Support Section -->
+        <section id="faq" class="faq-section">
+            <div class="section-header">
+                <h2 id="faq-title">Frequently Asked Questions & Technical Support</h2>
+                <p id="faq-subtitle">Everything you need to know about security, blueprints, and data integrity</p>
+            </div>
+
+            <div class="faq-item">
+                <h4 id="faq1-q">How does GridSnag guarantee zero data egress?</h4>
+                <p id="faq1-a">GridSnag is built strictly with zero network entitlements and zero external network calls. All drawings, photos, voice models, and punch items are stored within Apple's local encrypted sandbox. You can verify this by running the app in Airplane Mode or using network monitoring tools.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4 id="faq2-q">What blueprint formats are supported?</h4>
+                <p id="faq2-a">GridSnag supports vector and raster PDF blueprints exported directly from AutoCAD, Revit, ArchiCAD, and MicroStation. Vector blueprints support up to 1000% lossless zoom. Furthermore, you can use the built-in Interactive Structural Grid mode without any blueprint files.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4 id="faq3-q">Does GridSnag require an account or subscription?</h4>
+                <p id="faq3-a">No account, registration, or subscription is required. Download once and use it permanently across iPhone, iPad, and Mac under Apple's Universal Purchase.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4 id="faq4-q">How do I get customer support or report an issue?</h4>
+                <p id="faq4-a">You can reach our engineering team directly at <a href="mailto:howly7777777@gmail.com" style="color: var(--primary-cyan);">howly7777777@gmail.com</a> or open an issue on our GitHub repository. We respond within 24 hours.</p>
             </div>
         </section>
     </main>
 
-    <!-- 頁尾 -->
+    <!-- Footer -->
     <footer>
         <div class="footer-container">
             <div class="footer-col" style="grid-column: span 2;">
                 <div class="brand-logo" style="margin-bottom: 1rem;">
                     <div class="logo-icon">G</div>
-                    GridSnag 巡檢軸網
+                    GridSnag
                 </div>
-                <p style="color: var(--text-sub); font-size: 0.9rem; max-width: 400px; line-height: 1.7;">
-                    專為高機密施工場所設計的下一代 CAD 巡檢與數位黑板工具。原生支援 iOS、iPadOS 與 macOS。
+                <p style="color: var(--text-sub); font-size: 0.9rem; max-width: 420px; line-height: 1.7;" id="footer-tagline">
+                    The next-generation CAD structural snagging and digital blackboard platform built natively for high-security industrial facilities. Available on iPhone, iPad, and Mac.
                 </p>
             </div>
 
             <div class="footer-col">
-                <h4>法規與條款</h4>
+                <h4 id="footer-col1-title">Legal & Security</h4>
                 <ul>
-                    <li><a href="privacy.html">隱私權政策 (Privacy Policy)</a></li>
-                    <li><a href="#security">機密零外洩認證</a></li>
+                    <li><a href="privacy.html" id="footer-privacy-link">Privacy Policy (Zero Egress)</a></li>
+                    <li><a href="#security" id="footer-security-link">Air-Gapped Architecture</a></li>
+                    <li><a href="#workflow" id="footer-workflow-link">Field Workflow Guide</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
-                <h4>支援與聯繫</h4>
+                <h4 id="footer-col2-title">Customer Support</h4>
                 <ul>
-                    <li><a href="mailto:support@vajrahowly.com">技術支援：support@vajrahowly.com</a></li>
-                    <li><a href="https://github.com/vajrahowly/gridsnag" target="_blank">GitHub 官方專案</a></li>
+                    <li><a href="mailto:howly7777777@gmail.com">Email: howly7777777@gmail.com</a></li>
+                    <li><a href="https://github.com/howly7777777-svg/gridsnag" target="_blank">GitHub Repository</a></li>
+                    <li><a href="#faq" id="footer-faq-link">FAQ & Technical Help</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <div>&copy; 2026 Vajrahowly. All rights reserved. Bundle ID: com.vajrahowly.gridsnag</div>
-            <div>Designed for iPhone, iPad & Mac (Universal Purchase)</div>
+            <div>&copy; 2026 Vajrahowly. All rights reserved. Bundle ID: <code>com.vajrahowly.gridsnag</code></div>
+            <div>Universal Purchase for iPhone, iPad & Mac</div>
         </div>
     </footer>
 
+    <!-- Multi-Language Dynamic Translation Script -->
+    <script>
+        const translations = {
+            en: {
+                page_title: "GridSnag - 100% Offline Structural Snagging & Regulatory Digital Blackboard",
+                meta_desc: "GridSnag is the next-generation 100% offline field inspection and punch list system built natively for semiconductor fabs, cleanroom facilities, MEP contractors, and critical infrastructure. Zero Cloud Egress, 1000% vector CAD zoom, column grid auto-snap, on-device voice AI, and regulatory digital blackboard photos.",
+                nav_features: "Features",
+                nav_security: "Zero Cloud Egress",
+                nav_workflow: "Workflow",
+                nav_faq: "FAQ & Support",
+                nav_privacy: "Privacy",
+                hero_badge: "100% OFFLINE & ZERO CLOUD EGRESS CERTIFIED",
+                hero_title: "The Mission-Critical Construction Snagging & <span>Digital Blackboard</span> System",
+                hero_desc: "Engineered specifically for semiconductor fabs, cleanrooms, and mission-critical jobsites. 100% offline on-device architecture, 1000% vector CAD zoom, column grid auto-snapping, local speech AI, and regulatory digital blackboard photos.",
+                hero_cta_appstore: "<span></span> Download on App Store",
+                hero_cta_privacy: "🛡️ Zero Cloud Egress Guarantee",
+                sec_title: "100% Offline Air-Gapped Architecture · Zero Cloud Egress",
+                sec_desc: "Zero cloud API calls, zero analytics trackers, zero external servers. All drawings, photos, voice transcripts, and punch records remain encrypted inside Apple's local sandbox on your device. Verified for TSMC fabs, semiconductor cleanrooms, defense, and high-security industrial facilities.",
+                features_title: "Engineered for High-Tech & Mission-Critical Jobsites",
+                features_subtitle: "Revolutionizing field audit efficiency through five core technological pillars",
+                feat1_title: "Zero Cloud Egress Guarantee",
+                feat1_desc: "Complete air-gapped security. No remote servers, no cloud telemetry, no account login. Blueprints and photos never leave your device.",
+                feat2_title: "1000% Vector CAD Lossless Zoom",
+                feat2_desc: "Powered by native PDFKit vector rendering. Zoom in up to 1000% to inspect micro-valves, ductwork, and conduit line numbers with sub-millimeter clarity.",
+                feat3_title: "Column Grid Auto-Snap Algorithm",
+                feat3_desc: "Tap anywhere on the drawing. The geometric engine instantly snaps to the nearest column gridlines (e.g., Grid P22-P23 / RB-RC) automatically.",
+                feat4_title: "On-Device Speech AI Structuring",
+                feat4_desc: "Dictate hands-free while walking the jobsite. WhisperKit & Core ML transcribe and extract defect discipline, subcontractor, and due date locally in real time.",
+                feat5_title: "Regulatory Digital Blackboard",
+                feat5_desc: "Site photos automatically burn a permanent regulatory blackboard with project name, column coordinates, inspection items, and tamper-proof SHA-256 stamp.",
+                feat6_title: "One-Tap Official Audit PDF",
+                feat6_desc: "Export official audit reports locally with blueprint thumbnail indexes and watermarked photos. Share immediately via AirDrop or local export.",
+                reg_matrix_title: "🌍 Multi-Jurisdiction Regulatory Presets & Blackboard Standards",
+                reg_desc_us: "Fall protection, UL firestopping penetration, Class 1 Div 2 electrical specs.",
+                reg_desc_de: "Fire compartment seals, DGUV safety guidelines, European CE standards.",
+                reg_desc_jp: "公共建築工事標準仕様書、工事写真管理基準、配管貫通部耐火措置。",
+                reg_desc_tw: "施工品質管理作業要點、高科技無塵室消防貫穿部、動火作業檢驗。",
+                reg_desc_kr: "중대재해처벌법 대비 공사현장 안전점검, 방화구획 관통부 밀폐 확인.",
+                wf_title: "Minimalist Field Workflow: From Blueprint to Sign-off in 5 Steps",
+                wf_subtitle: "Eliminate cumbersome paperwork and disorganized photo sorting forever",
+                step1_title: "Create Custom Project & Import Vector Blueprints",
+                step1_desc: "Set up your specific project and jobsite with a clean workspace (zero leftover sample data). Supports single or multi-sheet CAD vector PDFs, or blueprint-free coordinate grid mode.",
+                step2_title: "Tap to Pin · Automatic Column Grid Snapping",
+                step2_desc: "Tap directly on the defect location. A snag pin is created instantly, with the geometric algorithm calculating nearest column axis coordinates (e.g. Grid P22-P23 / RB-RC).",
+                step3_title: "Hands-Free Voice Dictation · On-Device AI Structuring",
+                step3_desc: "Speak naturally on site: \"Firestopping sealant thickness between columns P22-P23 is inadequate. Critical defect, notify Tatung Fire Engineering to rectify by Friday.\" Core ML structures it instantly.",
+                step4_title: "Snap Inspection Photo · Auto-Burn Digital Blackboard",
+                step4_desc: "Capture the photo directly in the app. A permanent, regulatory-compliant digital blackboard with project metadata, coordinates, and timestamp is permanently burnt into the pixels.",
+                step5_title: "One-Tap Audit PDF Report · Instant Local Delivery",
+                step5_desc: "Tap \"Export Official PDF\" to generate a professional audit report with blueprint locator thumbnails, photos, and sign-off lines. Transfer instantly via AirDrop.",
+                faq_title: "Frequently Asked Questions & Technical Support",
+                faq_subtitle: "Everything you need to know about security, blueprints, and data integrity",
+                faq1_q: "How does GridSnag guarantee zero data egress?",
+                faq1_a: "GridSnag is built strictly with zero network entitlements and zero external network calls. All drawings, photos, voice models, and punch items are stored within Apple's local encrypted sandbox. You can verify this by running the app in Airplane Mode or using network monitoring tools.",
+                faq2_q: "What blueprint formats are supported?",
+                faq2_a: "GridSnag supports vector and raster PDF blueprints exported directly from AutoCAD, Revit, ArchiCAD, and MicroStation. Vector blueprints support up to 1000% lossless zoom. Furthermore, you can use the built-in Interactive Structural Grid mode without any blueprint files.",
+                faq3_q: "Does GridSnag require an account or subscription?",
+                faq3_a: "No account, registration, or subscription is required. Download once and use it permanently across iPhone, iPad, and Mac under Apple's Universal Purchase.",
+                faq4_q: "How do I get customer support or report an issue?",
+                faq4_a: "You can reach our engineering team directly at howly7777777@gmail.com or open an issue on our GitHub repository. We respond within 24 hours.",
+                footer_tagline: "The next-generation CAD structural snagging and digital blackboard platform built natively for high-security industrial facilities. Available on iPhone, iPad, and Mac."
+            },
+            zh: {
+                page_title: "GridSnag (巡檢軸網) - 100% 離線機密工程巡檢與法規數位小黑板",
+                meta_desc: "GridSnag 是專為半導體晶圓廠、高科技無塵室與機密工程打造的原生施工巡檢系統。100% 離線零外聯架構、CAD 向量圖紙千倍縮放、軸線柱位自動吸附、端側 AI 語音填單、法規小黑板浮水印相片及一鍵官方驗收 PDF 報告。",
+                nav_features: "功能特色",
+                nav_security: "機密零外聯",
+                nav_workflow: "工作流程",
+                nav_faq: "常見問題與支援",
+                nav_privacy: "隱私權政策",
+                hero_badge: "100% 離線機密架構 · 零雲端資料外洩認證",
+                hero_title: "專為高科技廠房與機密工程打造的 <span>原生施工巡檢與法規黑板系統</span>",
+                hero_desc: "拒絕雲端外聯！CAD 向量圖紙 1000% 深度無損縮放，輕觸藍圖幾何算法秒鎖柱網，端側神經網路免手寫語音填單，查驗相片自動永久燒錄法規電子小黑板。",
+                hero_cta_appstore: "<span></span> 前往 App Store 下載",
+                hero_cta_privacy: "🛡️ 查驗零外聯隱私承諾",
+                sec_title: "100% 離線機密架構 · 零雲端外洩保證 (Zero Cloud Egress)",
+                sec_desc: "全系統無任何雲端 API、無追蹤器、無伺服器。圖紙、照片、語音與缺失紀錄均儲存於本機加密沙盒中。即使在完全無收訊的晶圓無塵室或地下深層結構，所有功能皆能全速運行，完全符合台積電與國際高科技廠房嚴格資安規範。",
+                features_title: "專為高科技與機密重大工程而生",
+                features_subtitle: "以五大核心技術支柱，徹底革新工程查驗與驗收效率",
+                feat1_title: "100% 機密零外洩 (Zero Cloud Egress)",
+                feat1_desc: "完全物理隔離級安全。無伺服器、無雲端遙測、無需登入帳號。圖紙與現場照片絕不離開您的設備。",
+                feat2_title: "CAD 向量藍圖千倍縮放 (1000% Zoom)",
+                feat2_desc: "採用 Apple PDFKit 原生向量渲染技術，支援 1000% 深度縮放，微小閥門管線編號依然銳利清晰。",
+                feat3_title: "柱網幾何自動吸附 (Grid Snapping)",
+                feat3_desc: "點擊圖紙任意位置，演算法自動計算並鎖定最靠近之結構柱網座標（如 Grid P22-P23 / RB-RC）。",
+                feat4_title: "端側 AI 語音自動填單 (Voice Structuring)",
+                feat4_desc: "現場邊巡檢邊口述，端側 WhisperKit 與 Core ML 即時分析語意，自動分類工種、缺失等級與改善期限。",
+                feat5_title: "法規數位電子小黑板 (Digital Blackboard)",
+                feat5_desc: "拍照現場自動永久燒錄工程名稱、柱位座標、檢驗項目、合格印戳與防竄改 SHA-256 數位戳記。",
+                feat6_title: "一鍵原生驗收 PDF 報告 (Audit Report)",
+                feat6_desc: "現場一鍵向量排版產出符合公共工程規範之驗收紀錄總表，附圖紙縮圖與相片，支援 AirDrop 現場交付。",
+                reg_matrix_title: "🌍 內建美德日台韓五國建築法規與黑板樣式",
+                reg_desc_us: "OSHA 1926 高空防墜標準、IBC 2026 防火分區與 ASTM E814 穿管封堵規範。",
+                reg_desc_de: "DIN 4102 防火建築規範、MLAR 管線耐火阻隔標準與 DGUV 安全規範。",
+                reg_desc_jp: "國土交通省工事寫真管理基準、建築基準法設備貫通部耐火被覆。",
+                reg_desc_tw: "公共工程委員會品管要點、建築技術規則防火區劃、動火作業檢驗。",
+                reg_desc_kr: "重大災害處罰法 (SAPA) 工事現場安全點檢、產業安全保健法防火密閉。",
+                wf_title: "極簡巡檢工作流：從匯入圖紙到驗收只需 5 步",
+                wf_subtitle: "徹底擺脫厚重紙本藍圖、雜亂照片比對與繁複辦公室補登",
+                step1_title: "自訂工程案名與工地，匯入 CAD 向量圖紙",
+                step1_desc: "設定專屬專案案名與工地現場，乾淨工作區零殘留示範資料。支援單張或多張向量 PDF，或直接使用原生結構網格模式。",
+                step2_title: "輕觸藍圖落點，系統自動識別柱位座標",
+                step2_desc: "在缺失位置輕點一下，圖釘即刻生成，幾何演算法自動推算鄰近柱位與軸線編號（如 Grid P22-P23 / RB-RC）。",
+                step3_title: "現場口述免手寫，端側 AI 即時結構化提取",
+                step3_desc: "現場口述：「P22-P23 柱位間防火泥厚度不足，屬嚴重缺失，請大同消防工程本週五前改善。」端側 AI 即刻結構化填妥五大欄位。",
+                step4_title: "拍攝查驗照片，自動永久燒錄法規電子黑板",
+                step4_desc: "相機即拍即存，相片右下角自動嵌入符合法規之數位小黑板與查驗判定，省去所有後製修圖時間。",
+                step5_title: "一鍵匯出驗收 PDF 報告，直接現場交付",
+                step5_desc: "點擊「產出報表」，即時渲染出附帶圖紙定位縮圖與黑板相片之正式驗收總表，支援 AirDrop 現場交付監造或業主。",
+                faq_title: "常見問題與技術支援 (FAQ & Support)",
+                faq_subtitle: "關於安全架構、圖紙支援與資料保存的常見解答",
+                faq1_q: "GridSnag 如何保證 100% 零雲端資料外洩？",
+                faq1_a: "GridSnag 於系統權限中未申請任何網路連線能力，無外部 API 接口。所有圖紙、相片、語音與工程資料均完整隔離於 Apple 本機加密沙盒。您可以開啟飛航模式進行查驗測試。",
+                faq2_q: "支援哪些 CAD 圖紙格式？",
+                faq2_a: "支援由 AutoCAD、Revit、ArchiCAD 等軟體匯出之標準向量 PDF 藍圖，最高支援 1000% 無損深度縮放。若手邊無圖紙，亦可啟用原生結構座標網格系統即刻巡檢。",
+                faq3_q: "是否需要註冊帳號或支付訂閱費用？",
+                faq3_a: "完全無須註冊帳號、無訂閱制。一次下載即可透過 Apple 通用購買 (Universal Purchase) 在 iPhone、iPad 與 Mac 上永久完整使用。",
+                faq4_q: "如何取得技術支援或回報建議？",
+                faq4_a: "您可以直接發送郵件至 support@vajrahowly.com，或於我們的 GitHub 專案提出 Issue，工程團隊將在 24 小時內協助回覆。",
+                footer_tagline: "專為高機密施工場所設計的下一代 CAD 巡檢與數位黑板工具。原生支援 iOS、iPadOS 與 macOS。"
+            },
+            ja: {
+                page_title: "GridSnag - 100% オフライン施工検査＆法令電子黒板システム",
+                meta_desc: "GridSnag は半導体工場、クリーンルーム、機密建設現場専用の次世代施工管理アプリです。外部通信ゼロの完全オフライン、CAD図面1000%拡大、柱芯自動吸着、端末内音声AI、工事写真への電子小黒板自動焼き込み、ワンタップPDF出力に対応。",
+                nav_features: "機能特徴",
+                nav_security: "外部通信ゼロ",
+                nav_workflow: "ワークフロー",
+                nav_faq: "サポート＆FAQ",
+                nav_privacy: "プライバシー",
+                hero_badge: "100% オフライン・外部通信ゼロ認証済",
+                hero_title: "機密現場・半導体工場の為の <span>施工検査＆電子黒板システム</span>",
+                hero_desc: "外部クラウド通信を完全遮断！ベクトルCAD図面を1000%深度拡大、幾何アルゴリズムによる柱芯スナップ、端末内AI音声入力、国土交通省基準の電子小黒板を写真に自動焼き込み。",
+                hero_cta_appstore: "<span></span> App Store で入手",
+                hero_cta_privacy: "🛡️ オフライン機密保護基準",
+                sec_title: "100% オフライン・エアギャップ設計（外部通信ゼロ）",
+                sec_desc: "外部API通信、トラッカー、外部サーバーは一切使用しません。図面、是正指示、工事写真、音声メモはすべて端末内の暗号化サンドボックスに安全に保存。電波遮断された半導体クリーンルームでもすべての機能が軽快に動作します。",
+                features_title: "先端技術現場・機密プロジェクトのための設計",
+                features_subtitle: "5つの革新的コアテクノロジーで現場の巡回検査と検収を劇的に効率化",
+                feat1_title: "完全オフライン・データ流出ゼロ",
+                feat1_desc: "物理的エアギャップ水準の安全性。サーバーやクラウドとの通信は一切なく、図面や現場写真は端末外へ流出しません。",
+                feat2_title: "ベクトル CAD 図面 1000% 拡大",
+                feat2_desc: "Apple PDFKit ネイティブ描画により、最大 1000% まで劣化なく滑らかに拡大。微小な配管バルブ番号まで鮮明に確認可能。",
+                feat3_title: "柱芯通り芯自動吸着 (Grid Snapping)",
+                feat3_desc: "図面上の不具合箇所をタップするだけで、幾何計算により最寄りの通り芯・柱座標（例：Grid P22-P23）を自動特定。",
+                feat4_title: "端末内 AI 音声入力 (Voice Structuring)",
+                feat4_desc: "現場を歩きながら音声でメモ。「P22柱間の防火区画貫通部、充填深さ不足。」端末内の WhisperKit & Core ML が自動解析。",
+                feat5_title: "法令適合の電子小黒板焼き込み",
+                feat5_desc: "撮影した工事写真に、工事名・工種・測点柱位置・施工者・合否判定・改ざん防止ハッシュを自動で永久焼き込み。",
+                feat6_title: "ワンタップ公式検収 PDF 報告書",
+                feat6_desc: "図面位置図と黒板付き写真を統合した正式な是正指示書・検収帳票を現場で即座に出力。AirDrop で即座に提出可能。",
+                reg_matrix_title: "🌍 5カ国の建築基準・電子黒板規格に標準対応",
+                reg_desc_us: "米 OSHA 1926 墜落防止・IBC 2026 耐火区画・UL 貫通部仕様。",
+                reg_desc_de: "独 DIN 4102 耐火区画基準・MLAR 配管耐火遮断・DGUV 基準。",
+                reg_desc_jp: "国土交通省「デジタル写真管理情報基準」、建築基準法設備貫通部。",
+                reg_desc_tw: "公共工程委員会施工品質管理基準、クリーンルーム消防貫通部。",
+                reg_desc_kr: "重大災害処罰法 (SAPA) 現場安全点検、産業安全保健法耐火措置。",
+                wf_title: "わずか 5 ステップ：図面取込から検収報告書まで",
+                wf_subtitle: "分厚い紙図面の持ち歩きや、事務所での写真整理残業から解放",
+                step1_title: "工事案件の新規作成と CAD 図面の取り込み",
+                step1_desc: "現場に合わせた案件名と現場名を設定（デモデータの残存なし）。1枚〜複数枚のベクトル PDF 図面に対応。図面なしの構造格子モードも利用可能。",
+                step2_title: "図面タップでピン留め・柱芯を自動吸着",
+                step2_desc: "不具合箇所をタップするだけでピンが立ち、最寄りの通り芯柱座標（例：P22-P23）を瞬時に自動算出。",
+                step3_title: "歩きながら音声入力・端末内 AI が自動構造化",
+                step3_desc: "現場で口頭指示：「P22配管貫通部の充填厚不足。重大指摘、金曜までに是正願います。」AI が工種・重要度・期日を自動分類。",
+                step4_title: "是正前後の写真撮影・電子小黒板を自動焼き込み",
+                step4_desc: "アプリ内カメラで撮影するだけで、写真右下に法令基準の電子黒板と合格スタンプを自動合成。後からの画像編集は不要。",
+                step5_title: "ワンタップで PDF 報告書出力・AirDrop で即提出",
+                step5_desc: "「帳票出力」を押すと、図面サムネイルと黒板写真入りの正式報告書を生成。施主や元請けへ現場で直接 AirDrop 納品。",
+                faq_title: "よくあるご質問とサポート (FAQ & Support)",
+                faq_subtitle: "セキュリティ仕様・対応形式・データ保護について",
+                faq1_q: "本当に外部通信を一切行わないのですか？",
+                faq1_a: "はい。GridSnag はネットワーク通信権限を一切持たず、外部サーバーへの通信機能はありません。機密図面や現場写真は端末内の暗号化サンドボックス内に完全に隔離されます。機内モードでも全機能が動作します。",
+                faq2_q: "対応している図面ファイル形式は？",
+                faq2_a: "AutoCAD や Revit、ArchiCAD 等から出力されたベクトル PDF 図面に最適化されており、1000% の無劣化拡大が可能です。また、図面データがない場合でも座標グリッド機能で検査を実施できます。",
+                faq3_q: "アカウント登録や月額サブスクリプションは必要ですか？",
+                faq3_a: "アカウント登録やサブスクリプションは一切不要です。買い切りで iPhone、iPad、Mac（ユニバーサル購入）のすべてでご利用いただけます。",
+                faq4_q: "問い合わせや不具合報告窓口はありますか？",
+                faq4_a: "サポート専用メールアドレス（support@vajrahowly.com）または公式 GitHub リポジトリにて承っております。24時間以内に技術担当よりご返信いたします。",
+                footer_tagline: "半導体工場や高セキュリティ現場のために設計された次世代CAD施工検査＆電子黒板アプリ。iPhone、iPad、Mac対応。"
+            },
+            ko: {
+                page_title: "GridSnag - 100% 오프라인 건설감리 및 법규 전자칠판 시스템",
+                meta_desc: "GridSnag은 반도체 클린룸, 대형 플랜트, 고보안 공사 현장 전용 100% 오프라인 현장감리 솔루션입니다. 외부 유출 없는 에어갭 설계, 벡터 CAD 1000% 줌, 기둥축 자동 스냅, 온디바이스 음성 AI, 사진 내 전자칠판 자동 각인, 원클릭 준공보고서 지원.",
+                nav_features: "주요기능",
+                nav_security: "데이터보안",
+                nav_workflow: "작업흐름",
+                nav_faq: "기술지원",
+                nav_privacy: "개인정보보호",
+                hero_badge: "100% 오프라인 에어갭 인증 · 데이터 외부유출 차단",
+                hero_title: "고보안 현장 및 반도체 공장을 위한 <span>현장 시공감리 & 전자칠판</span>",
+                hero_desc: "외부 클라우드 전송 완전 차단! 벡터 CAD 도면 1000% 무손실 줌, 기둥축(Grid) 자동 스냅 알고리즘, 온디바이스 음성 AI 자동 입력, 공사 전자칠판 사진 자동 각인.",
+                hero_cta_appstore: "<span></span> App Store에서 다운로드",
+                hero_cta_privacy: "🛡️ 에어갭 기밀보호 보증",
+                sec_title: "100% 완전 오프라인 에어갭(Air-Gapped) 아키텍처",
+                sec_desc: "외부 API 호출, 분석 트래커, 외부 서버가 일체 없습니다. 모든 도면, 하자 사진, 음성 녹음 및 조치 사항은 기기 내부의 암호화된 샌드박스에만 보관됩니다. 삼성전자, TSMC 등 반도체 팹의 최고 수준 보안 규격에 부합합니다.",
+                features_title: "첨단 플랜트 및 하이테크 공사 현장을 위한 핵심 기술",
+                features_subtitle: "현장 감리 업무의 효율을 극대화하는 5대 핵심 아키텍처",
+                feat1_title: "100% 기밀보호 (Zero Cloud Egress)",
+                feat1_desc: "완벽한 물리적 망분리급 안전성. 외부 서버나 계정 로그인이 없으며 도면과 현장 사진이 기기 밖으로 절대 유출되지 않습니다.",
+                feat2_title: "벡터 CAD 도면 1000% 무손실 줌",
+                feat2_desc: "Apple PDFKit 벡터 엔진으로 최대 1000%까지 깨짐 없이 확대. 미세 배관 밸브 번호와 트레이 라벨까지 선명하게 식별.",
+                feat3_title: "기둥축(Grid) 기하 알고리즘 자동 스냅",
+                feat3_desc: "도면상의 결함 지점을 터치하면 가장 가까운 구조 기둥축 좌표(예: Grid P22-P23)를 밀리미터 단위로 자동 인식.",
+                feat4_title: "온디바이스 음성 AI 자동 서식 입력",
+                feat4_desc: "현장 순찰 중 음성으로 지시. WhisperKit과 Core ML이 공종, 결함 등급, 조치 담당자, 시정 기한을 실시간 자동 분류.",
+                feat5_title: "공사 표준 전자칠판 사진 자동 각인",
+                feat5_desc: "촬영 즉시 공사명, 기둥축 좌표, 점검 항목, 합격 스탬프 및 위변조 방지 SHA-256 전자서명을 사진에 영구 각인.",
+                feat6_title: "원클릭 공식 준공·검측 PDF 보고서",
+                feat6_desc: "도면 위치 인덱스와 전자칠판 사진이 포함된 정식 검측 보고서를 현장에서 즉시 렌더링. AirDrop으로 발주처에 즉시 제출.",
+                reg_matrix_title: "🌍 한국·미국·독일·일본·대만 5개국 표준 법규 및 칠판 서식 탑재",
+                reg_desc_us: "미국 OSHA 1926 추락방지, IBC 2026 방화구획 및 ASTM E814 관통부 규격.",
+                reg_desc_de: "독일 DIN 4102 방화기준, MLAR 배관 관통 밀폐, DGUV 안전지침.",
+                reg_desc_jp: "일본 국토교통성 공사사진 관리기준, 건축기준법 설비관통부 내화피복.",
+                reg_desc_tw: "대만 공공공정위원회 품질관리기준, 클린룸 소방관통부 및 화기작업.",
+                reg_desc_kr: "대한민국 중대재해처벌법 대비 공사현장 안전점검, 산업안전보건법 방화관통부 밀폐.",
+                wf_title: "간결한 현장 감리 워크플로우: 5단계로 끝내는 검측",
+                wf_subtitle: "무거운 종이 도면과 야간 사진 정리 업무를 완벽히 대체",
+                step1_title: "현장 프로젝트 등록 및 CAD 벡터 도면 가져오기",
+                step1_desc: "현장명과 공사명을 등록하고(샘플 데이터 없음) 단일 또는 복수 페이지 벡터 PDF 도면을 로드합니다. 도면이 없는 경우 좌표 그리드 모드도 지원합니다.",
+                step2_title: "도면 터치 핀 생성 · 기둥축 좌표 자동 스냅",
+                step2_desc: "결함 지점을 터치하면 핀이 생성되고, 기하 엔진이 가장 가까운 기둥축 번호(예: Grid P22-P23)를 자동으로 매핑합니다.",
+                step3_title: "현장 음성 구술 · 온디바이스 AI 자동 입력",
+                step3_desc: "\"P22 기둥 구간 배관 방화 관통재 충진 두께 미달. 긴급 하자, 금요일까지 재시공 요청.\" 음성 분석으로 주요 필드 자동 채움.",
+                step4_title: "현장 사진 촬영 · 전자칠판 자동 워터마크 각인",
+                step4_desc: "앱 내 카메라로 촬영 즉시 규격 전자칠판과 검측 정보가 사진 우측 하단에 영구 각인되어 별도 편집이 필요 없습니다.",
+                step5_title: "원클릭 준공 검측 PDF 출력 · AirDrop 현장 전송",
+                step5_desc: "공식 보고서 생성 버튼을 누르면 도면 위치 썸네일과 칠판 사진이 정리된 PDF가 생성되어 현장에서 감리원 및 발주처에 즉시 전송됩니다.",
+                faq_title: "자주 묻는 질문 및 기술 지원 (FAQ & Support)",
+                faq_subtitle: "보안성, 도면 지원 형식 및 데이터 보관 안내",
+                faq1_q: "데이터 외부 유출 방지는 어떻게 보장되나요?",
+                faq1_a: "GridSnag은 네트워크 권한이 완전히 차단되어 있으며 외부 서버 API 호출을 일절 수행하지 않습니다. 모든 도면과 사진은 Apple의 로컬 암호화 샌드박스에만 보관됩니다. 비행기 모드에서도 모든 기능이 정상 작동합니다.",
+                faq2_q: "어떤 도면 형식을 지원하나요?",
+                faq2_a: "AutoCAD, Revit, MicroStation 등에서 내보낸 표준 벡터 PDF 도면을 지원하며 최대 1000% 무손실 확대가 가능합니다. 도면이 없는 경우 내장된 구조 좌표 그리드 모드를 바로 사용할 수 있습니다.",
+                faq3_q: "별도의 계정 가입이나 구독 결제가 필요한가요?",
+                faq3_a: "계정 가입이나 월 구독료가 전혀 없습니다. 한 번 다운로드하면 Apple의 Universal Purchase를 통해 iPhone, iPad, Mac에서 영구적으로 자유롭게 이용할 수 있습니다.",
+                faq4_q: "고객 지원 및 문의는 어디로 하나요?",
+                faq4_a: "공식 지원 이메일(support@vajrahowly.com) 또는 GitHub 리포지토리를 통해 문의해 주시면 24시간 이내에 전담 엔지니어가 답변해 드립니다.",
+                footer_tagline: "고보안 산업 시설을 위해 탄생한 차세대 CAD 시공감리 및 전자칠판 플랫폼. iPhone, iPad, Mac 완벽 지원."
+            },
+            de: {
+                page_title: "GridSnag - 100% Offline Bauüberwachung & Digitale Schautafel",
+                meta_desc: "GridSnag ist das native Bauinspektions- und Mängelmanagement-System für Halbleiterfabriken, Reinräume und sensible Großbaustellen. 100% Offline-Architektur, 1000% Vektor-CAD-Zoom, automatische Achsen-Einrastung und offizielle digitale Schautafeln.",
+                nav_features: "Funktionen",
+                nav_security: "Zero Cloud Egress",
+                nav_workflow: "Workflow",
+                nav_faq: "Support & FAQ",
+                nav_privacy: "Datenschutz",
+                hero_badge: "100% OFFLINE & ZERO-EGRESS ZERTIFIZIERT",
+                hero_title: "Bauüberwachung & <span>Digitale Schautafel</span> für Sicherheitsbaustellen",
+                hero_desc: "100% ohne Cloud-Verbindung! Vektor-CAD-Pläne bis 1000% stufenlos vergrößern, automatische Achsenzuordnung (Grid-Snapping), lokale Sprach-KI und vorschriftsmäßige Fototafeln.",
+                hero_cta_appstore: "<span></span> Im App Store laden",
+                hero_cta_privacy: "🛡️ Offline-Datenschutz-Garantie",
+                sec_title: "100% Air-Gapped Architektur · Garantiert kein Datenabfluss",
+                sec_desc: "Keine Server, keine Tracker, keine Cloud-Anbindung. Sämtliche Pläne, Mängelberichte, Fotos und Sprachaufnahmen verbleiben verschlüsselt in der lokalen Sandbox Ihres Apple-Geräts.",
+                features_title: "Entwickelt für High-Tech- und Sicherheitsbaustellen",
+                features_subtitle: "Fünf technische Säulen für maximale Effizienz bei Inspektion und Abnahme",
+                feat1_title: "Zero Cloud Egress Garantie",
+                feat1_desc: "Vollständige physikalische Isolation. Keine externen APIs, keine Benutzerkonten. Daten verlassen niemals das Gerät.",
+                feat2_title: "1000% Vektor-CAD-Zoom",
+                feat2_desc: "Natives PDFKit-Rendering ermöglicht verlustfreies Zoomen bis zu 1000% zur Erkennung kleinster Leitungs- und Brandschutzdetails.",
+                feat3_title: "Achsenraster-Fangfunktion (Grid Snap)",
+                feat3_desc: "Tippen Sie auf den Plan, und die Mängelstecknadel rastet automatisch an den nächstgelegenen Achsen ein (z. B. P22-P23).",
+                feat4_title: "On-Device Sprach-KI",
+                feat4_desc: "Freihändige Sprachaufzeichnung vor Ort. WhisperKit & Core ML analysieren Gewerk, Priorität und Frist in Echtzeit lokal.",
+                feat5_title: "Digitale Schautafel für Baustellenfotos",
+                feat5_desc: "Fotos werden automatisch mit Projektname, Achsenkoordinaten, Prüfstatus und manipulationssicherem SHA-256-Stempel versehen.",
+                feat6_title: "Offizieller Abnahmebericht als PDF",
+                feat6_desc: "Erstellen Sie mit einem Klick prüffähige Inspektionsberichte inklusive Planverortung und Fototafeln. Sofortiger AirDrop-Export.",
+                reg_matrix_title: "🌍 Internationale Bauvorschriften & Vorlagen integriert",
+                reg_desc_us: "US OSHA 1926 Absturzsicherung, IBC 2026 Brandschottung und ASTM E814.",
+                reg_desc_de: "DIN 4102 / DIN EN 1366 Brandschottung, MLAR Leitungsanlagen, DGUV Vorschriften.",
+                reg_desc_jp: "Japan MLIT Qualitätsstandards für Baustellenfotos, Bauordnungsgesetz.",
+                reg_desc_tw: "Taiwan Bauqualitätsrichtlinien, Reinraum-Brandschutz und Heißarbeiten.",
+                reg_desc_kr: "Korea SAPA Unfallverhütungsgesetz, KOSHA Brandschutz-Abschottungen.",
+                wf_title: "Schlanker Baustellen-Workflow in 5 Schritten",
+                wf_subtitle: "Keine schweren Papierpläne und keine zeitraubende Büro-Nachbereitung mehr",
+                step1_title: "Projekt anlegen & CAD-Vektorplan importieren",
+                step1_desc: "Legen Sie Ihr Projekt individuell an. Unterstützt ein- und mehrseitige Vektor-PDFs oder den planlosen Koordinatenraster-Modus.",
+                step2_title: "Mangel auf Plan markieren · Achsen-Einrastung",
+                step2_desc: "Ein Tipp genügt: Die Stecknadel wird platziert und die Achsenkoordinaten (z. B. P22-P23) werden präzise berechnet.",
+                step3_title: "Sprachaufnahme vor Ort · Lokale KI-Strukturierung",
+                step3_desc: "Diktieren Sie Mängel freihändig. Die On-Device-KI ordnet Gewerk, Mangelbeschreibung und Fristdatum sofort zu.",
+                step4_title: "Foto aufnehmen · Automatische Fototafel",
+                step4_desc: "Das Prüffoto wird direkt in der App aufgenommen und mit einer normgerechten digitalen Schautafel dauerhaft versehen.",
+                step5_title: "Abnahmebericht per Klick · Sofortige Übergabe",
+                step5_desc: "Generieren Sie den fertigen PDF-Prüfbericht und übergeben Sie ihn direkt auf der Baustelle via AirDrop an die Bauleitung.",
+                faq_title: "Häufig gestellte Fragen & Technischer Support",
+                faq_subtitle: "Informationen zu Datensicherheit, Planformaten und Support",
+                faq1_q: "Wie wird der Ausschluss von Datenabfluss garantiert?",
+                faq1_a: "GridSnag verfügt über keinerlei Netzwerkberechtigungen und sendet keine Anfragen ins Internet. Alle Daten verbleiben in der verschlüsselten lokalen Sandbox Ihres Apple-Geräts.",
+                faq2_q: "Welche CAD-Dateiformate werden unterstützt?",
+                faq2_a: "GridSnag verarbeitet Vektor-PDF-Pläne aus AutoCAD, Revit, ArchiCAD etc. mit bis zu 1000% verlustfreier Vergrößerung sowie planlose Achsenraster.",
+                faq3_q: "Gibt es Abonnements oder Benutzerkonten?",
+                faq3_a: "Nein, weder Benutzerkonten noch Abos. Einmaliger Kauf mit Universal Purchase für iPhone, iPad und Mac.",
+                faq4_q: "Wie erreiche ich den technischen Kundendienst?",
+                faq4_a: "Schreiben Sie unserem Ingenieurteam an support@vajrahowly.com oder nutzen Sie unser GitHub-Repository. Wir antworten innerhalb von 24 Stunden.",
+                footer_tagline: "Die nächste Generation der CAD-Bauinspektion und digitalen Schautafeln für sensible Industrieanlagen. Für iPhone, iPad und Mac."
+            }
+        };
+
+        function setLanguage(lang) {
+            const data = translations[lang] || translations.en;
+            
+            // Set HTML lang attribute
+            document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : lang;
+
+            // Page metadata
+            document.getElementById('page-title').textContent = data.page_title;
+            document.getElementById('meta-description').setAttribute('content', data.meta_desc);
+
+            // Nav links
+            document.getElementById('nav-features').textContent = data.nav_features;
+            document.getElementById('nav-security').textContent = data.nav_security;
+            document.getElementById('nav-workflow').textContent = data.nav_workflow;
+            document.getElementById('nav-faq').textContent = data.nav_faq;
+            document.getElementById('nav-privacy').textContent = data.nav_privacy;
+
+            // Hero section
+            document.getElementById('hero-badge-text').textContent = data.hero_badge;
+            document.getElementById('hero-title').innerHTML = data.hero_title;
+            document.getElementById('hero-desc').textContent = data.hero_desc;
+            document.getElementById('hero-cta-appstore').innerHTML = data.hero_cta_appstore;
+            document.getElementById('hero-cta-privacy').textContent = data.hero_cta_privacy;
+
+            // Security banner
+            document.getElementById('sec-title').textContent = data.sec_title;
+            document.getElementById('sec-desc').textContent = data.sec_desc;
+
+            // Features section
+            document.getElementById('features-title').textContent = data.features_title;
+            document.getElementById('features-subtitle').textContent = data.features_subtitle;
+            document.getElementById('feat1-title').textContent = data.feat1_title;
+            document.getElementById('feat1-desc').textContent = data.feat1_desc;
+            document.getElementById('feat2-title').textContent = data.feat2_title;
+            document.getElementById('feat2-desc').textContent = data.feat2_desc;
+            document.getElementById('feat3-title').textContent = data.feat3_title;
+            document.getElementById('feat3-desc').textContent = data.feat3_desc;
+            document.getElementById('feat4-title').textContent = data.feat4_title;
+            document.getElementById('feat4-desc').textContent = data.feat4_desc;
+            document.getElementById('feat5-title').textContent = data.feat5_title;
+            document.getElementById('feat5-desc').textContent = data.feat5_desc;
+            document.getElementById('feat6-title').textContent = data.feat6_title;
+            document.getElementById('feat6-desc').textContent = data.feat6_desc;
+
+            // Regulatory matrix
+            document.getElementById('reg-matrix-title').textContent = data.reg_matrix_title;
+            document.getElementById('reg-desc-us').textContent = data.reg_desc_us;
+            document.getElementById('reg-desc-de').textContent = data.reg_desc_de;
+            document.getElementById('reg-desc-jp').textContent = data.reg_desc_jp;
+            document.getElementById('reg-desc-tw').textContent = data.reg_desc_tw;
+            document.getElementById('reg-desc-kr').textContent = data.reg_desc_kr;
+
+            // Workflow section
+            document.getElementById('wf-title').textContent = data.wf_title;
+            document.getElementById('wf-subtitle').textContent = data.wf_subtitle;
+            document.getElementById('step1-title').textContent = data.step1_title;
+            document.getElementById('step1-desc').textContent = data.step1_desc;
+            document.getElementById('step2-title').textContent = data.step2_title;
+            document.getElementById('step2-desc').textContent = data.step2_desc;
+            document.getElementById('step3-title').textContent = data.step3_title;
+            document.getElementById('step3-desc').textContent = data.step3_desc;
+            document.getElementById('step4-title').textContent = data.step4_title;
+            document.getElementById('step4-desc').textContent = data.step4_desc;
+            document.getElementById('step5-title').textContent = data.step5_title;
+            document.getElementById('step5-desc').textContent = data.step5_desc;
+
+            // FAQ section
+            document.getElementById('faq-title').textContent = data.faq_title;
+            document.getElementById('faq-subtitle').textContent = data.faq_subtitle;
+            document.getElementById('faq1-q').textContent = data.faq1_q;
+            document.getElementById('faq1-a').textContent = data.faq1_a;
+            document.getElementById('faq2-q').textContent = data.faq2_q;
+            document.getElementById('faq2-a').textContent = data.faq2_a;
+            document.getElementById('faq3-q').textContent = data.faq3_q;
+            document.getElementById('faq3-a').textContent = data.faq3_a;
+            document.getElementById('faq4-q').textContent = data.faq4_q;
+            document.getElementById('faq4-a').textContent = data.faq4_a;
+
+            // Footer
+            document.getElementById('footer-tagline').textContent = data.footer_tagline;
+
+            // Update active button state
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Store preference
+            try {
+                localStorage.setItem('gridsnag_lang', lang);
+            } catch (e) {}
+        }
+
+        // Initialize language
+        document.addEventListener('DOMContentLoaded', () => {
+            let preferredLang = 'en'; // Default to English for Apple Store Review and International users
+            try {
+                const stored = localStorage.getItem('gridsnag_lang');
+                if (stored && translations[stored]) {
+                    preferredLang = stored;
+                } else {
+                    const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+                    if (browserLang.startsWith('zh')) preferredLang = 'zh';
+                    else if (browserLang.startsWith('ja')) preferredLang = 'ja';
+                    else if (browserLang.startsWith('ko')) preferredLang = 'ko';
+                    else if (browserLang.startsWith('de')) preferredLang = 'de';
+                    else preferredLang = 'en';
+                }
+            } catch (e) {}
+
+            setLanguage(preferredLang);
+
+            // Bind click events
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const lang = e.target.getAttribute('data-lang');
+                    setLanguage(lang);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
